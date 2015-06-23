@@ -97,7 +97,13 @@
 #' @seealso \code{\link{JS}}.
 #'
 #' @export
-forceNetwork <- function(Links,
+forceNetwork <- function(Links, ...) UseMethod("forceNetwork")
+
+
+#' @method forceNetwork default
+#' @rdname forceNetwork
+#' @export
+forceNetwork.default <- function(Links,
                          Nodes,
                          Source,
                          Target,
@@ -116,7 +122,8 @@ forceNetwork <- function(Links,
                          linkColour = "#666",
                          opacity = 0.6,
                          zoom = FALSE,
-                         legend = FALSE)
+                         legend = FALSEm,
+                         ...)
 {
         # Hack for UI consistency. Think of improving.
         colourScale <- as.character(colourScale)
@@ -180,6 +187,19 @@ forceNetwork <- function(Links,
                 htmlwidgets::sizingPolicy(padding = 0, browser.fill = TRUE),
                 package = "networkD3"
         )
+}
+
+
+
+#' @method forceNetwork igraph
+#' @rdname forceNetwork
+#' @export
+forceNetwork.igraph <- function(Links, ...)
+{
+  db <- igraph::get.data.frame(Links, what="both")
+  forceNetwork.default(Links=db$edges,
+                       Nodes=db$vertices,
+                       ...)
 }
 
 #' @rdname networkD3-shiny

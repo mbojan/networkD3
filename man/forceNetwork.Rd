@@ -2,6 +2,8 @@
 % Please edit documentation in R/forceNetwork.R
 \name{forceNetwork}
 \alias{forceNetwork}
+\alias{forceNetwork.default}
+\alias{forceNetwork.igraph}
 \title{Create a D3 JavaScript force directed network graph.}
 \source{
 D3.js was created by Michael Bostock. See \url{http://d3js.org/} and, more
@@ -9,12 +11,18 @@ specifically for force directed networks
 \url{https://github.com/mbostock/d3/wiki/Force-Layout}.
 }
 \usage{
-forceNetwork(Links, Nodes, Source, Target, Value, NodeID, Nodesize, Group,
-  height = NULL, width = NULL, colourScale = JS("d3.scale.category20()"),
-  fontSize = 7, linkDistance = 50,
+forceNetwork(Links, ...)
+
+\method{forceNetwork}{default}(Links, Nodes, Source, Target, Value, NodeID,
+  Nodesize, Group, height = NULL, width = NULL,
+  colourScale = JS("d3.scale.category20()"), fontSize = 7,
+  linkDistance = 50,
   linkWidth = JS("function(d) { return Math.sqrt(d.value); }"),
   radiusCalculation = JS(" Math.sqrt(d.nodesize)+6"), charge = -120,
-  linkColour = "#666", opacity = 0.6, zoom = FALSE, legend = FALSE)
+  linkColour = "#666", opacity = 0.6, zoom = FALSE, legend = FALSEm,
+  ...)
+
+\method{forceNetwork}{igraph}(Links, ...)
 }
 \arguments{
 \item{Links}{a data frame object with the links between the nodes. It should
