@@ -2,6 +2,8 @@
 % Please edit documentation in R/simpleNetwork.R
 \name{simpleNetwork}
 \alias{simpleNetwork}
+\alias{simpleNetwork.default}
+\alias{simpleNetwork.igraph}
 \title{Function for creating simple D3 JavaScript force directed network graphs.}
 \source{
 D3.js was created by Michael Bostock. See \url{http://d3js.org/} and,
@@ -9,11 +11,15 @@ D3.js was created by Michael Bostock. See \url{http://d3js.org/} and,
   \url{https://github.com/mbostock/d3/wiki/Force-Layout}
 }
 \usage{
-simpleNetwork(Data, Source = NULL, Target = NULL, height = NULL,
-  width = NULL, linkDistance = 50, charge = -200, fontSize = 7,
-  linkColour = "#666", nodeColour = "#3182bd",
+simpleNetwork(Data, ...)
+
+\method{simpleNetwork}{default}(Data, Source = NULL, Target = NULL,
+  height = NULL, width = NULL, linkDistance = 50, charge = -200,
+  fontSize = 7, linkColour = "#666", nodeColour = "#3182bd",
   nodeClickColour = "#E34A33", textColour = "#3182bd", opacity = 0.6,
-  zoom = F)
+  zoom = F, ...)
+
+\method{simpleNetwork}{igraph}(Data, ...)
 }
 \arguments{
 \item{Data}{a data frame object with three columns. The first two are the

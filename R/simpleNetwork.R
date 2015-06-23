@@ -49,7 +49,12 @@
 #'   \url{https://github.com/mbostock/d3/wiki/Force-Layout}
 #'
 #' @export
-simpleNetwork <- function(Data,
+simpleNetwork <- function(Data, ...) UseMethod("simpleNetwork")
+
+#' @method simpleNetwork default
+#' @export
+#' @rdname simpleNetwork
+simpleNetwork.default <- function(Data,
                           Source = NULL,
                           Target = NULL,
                           height = NULL,
@@ -62,7 +67,7 @@ simpleNetwork <- function(Data,
                           nodeClickColour = "#E34A33",
                           textColour = "#3182bd",
                           opacity = 0.6,
-                          zoom = F)
+                          zoom = F, ...)
 {
   # validate input
     if (!is.data.frame(Data))
@@ -97,6 +102,16 @@ simpleNetwork <- function(Data,
         htmlwidgets::sizingPolicy(padding = 0, browser.fill = TRUE),
         package = "networkD3"
     )
+}
+
+
+#' @method simpleNetwork igraph
+#' @export
+#' @rdname simpleNetwork
+simpleNetwork.igraph <- function(Data, ...)
+{
+  d <- igraph::get.data.frame(Data, what="edges")
+  simpleNetwork.default(d, ...)
 }
 
 #' @rdname networkD3-shiny
